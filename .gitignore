@@ -4,3 +4,5 @@ application/logs/*
 index.php/
 .DS_Store
 *.log
+system/
+vendor/
