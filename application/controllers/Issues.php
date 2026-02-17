@@ -7,6 +7,7 @@ class Issues extends CI_Controller
     {
         parent::__construct();
         if (!$this->session->userdata('logged_in')) {
+            $this->session->set_userdata('redirect_url', current_url());
             redirect('auth/login');
         }
         $this->load->model('Asset_model');
