@@ -889,7 +889,7 @@ class Assets extends CI_Controller
         $id = $this->input->post('asset_id');
         $qty = (int) $this->input->post('quantity');
 
-        $asset = $this->db->get_where('assets', ['id' => $id])->row();
+        $asset = $this->db->where('id', $id)->get('assets')->row();
 
         if ($this->Asset_model->partial_return($id, $qty)) {
             $this->Audit_model->log_action('Partial Return', 'Asset', $id, "returned $qty units of {$asset->name} to stock");
