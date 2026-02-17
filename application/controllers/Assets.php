@@ -588,7 +588,7 @@ class Assets extends CI_Controller
             redirect('dashboard');
         }
 
-        $asset = $this->db->get_where('assets', ['id' => $id])->row();
+        $asset = $this->db->where('id', $id)->get('assets')->row();
 
         if ($this->Asset_model->delete($id)) {
             if ($asset) {
