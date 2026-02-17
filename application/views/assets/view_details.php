@@ -144,19 +144,9 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="px-6 mt-6 grid grid-cols-3 gap-3">
+    <div class="px-6 mt-6 flex justify-center">
         <button
-            class="bg-white py-3.5 px-2 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-1">
-            <span class="material-symbols-rounded text-blue-600 text-xl">edit</span>
-            <span class="text-[10px] font-bold text-gray-800">Edit</span>
-        </button>
-        <button
-            class="bg-white py-3.5 px-2 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-1">
-            <span class="material-symbols-rounded text-red-600 text-xl">delete</span>
-            <span class="text-[10px] font-bold text-gray-800">Delete</span>
-        </button>
-        <button
-            class="bg-white py-3.5 px-2 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-1">
+            class="w-full bg-white py-3.5 px-2 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-1">
             <span class="material-symbols-rounded text-orange-400 text-xl font-light">history</span>
             <div class="flex flex-col items-center -mt-1">
                 <span class="text-[9px] font-bold text-gray-800 leading-tight">Mark as Not Working</span>
