@@ -1,6 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * @property CI_Session $session
+ * @property CI_DB_query_builder $db
+ * @property CI_Form_validation $form_validation
+ * @property CI_Input $input
+ * @property CI_Loader $load
+ * @property Asset_model $Asset_model
+ * @property Audit_model $Audit_model
+ * @property Category_model $Category_model
+ * @property College_model $College_model
+ * @property Issue_model $Issue_model
+ */
 class Issues extends CI_Controller
 {
     public function __construct()
