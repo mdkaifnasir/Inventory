@@ -11,7 +11,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Audit_model $Audit_model
  * @property Category_model $Category_model
  * @property College_model $College_model
- * @property Issue_model $Issue_model
  */
 class Issues extends CI_Controller
 {
