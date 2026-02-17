@@ -4,6 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asset_model extends CI_Model
 {
 
+    public function get_asset_by_id($id)
+    {
+        $this->db->select('assets.*, categories.name as category_name, colleges.name as college_name, colleges.code as college_code');
+        $this->db->from('assets');
+        $this->db->join('categories', 'categories.id = assets.category_id', 'left');
+        $this->db->join('colleges', 'colleges.id = assets.college_id', 'left');
+        $this->db->where('assets.id', $id);
+        return $this->db->get()->row();
+    }
+
+    public function update_asset($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('assets', $data);
+    }
+
     public function get_all()
     {
         $this->db->select('assets.*, categories.name as category_name, colleges.name as college_name, colleges.code as college_code');

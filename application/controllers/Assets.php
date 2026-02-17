@@ -891,6 +891,78 @@ class Assets extends CI_Controller
         redirect('assets/distribution/' . $root_id);
     }
 
+    public function edit($id)
+    {
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_userdata('redirect_url', current_url());
+            redirect('auth/login');
+        }
+
+        $asset = $this->Asset_model->get_asset_by_id($id);
+        if (!$asset) {
+            show_404();
+        }
+
+        $data['title'] = 'AZAM IT | Edit Item';
+        $data['page_title'] = 'Edit Inventory Item';
+        $data['asset'] = $asset;
+        $data['categories'] = $this->Category_model->get_all();
+        $data['colleges'] = $this->College_model->get_all();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('assets/edit', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function update()
+    {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('auth/login');
+        }
+
+        $id = $this->input->post('id');
+        $this->form_validation->set_rules('name', 'Item Name', 'required');
+        $this->form_validation->set_rules('category_id', 'Category', 'required');
+        $this->form_validation->set_rules('asset_tag', 'Asset Tag', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('assets/edit/' . $id);
+        } else {
+            $update_data = array(
+                'name' => $this->input->post('name'),
+                'category_id' => $this->input->post('category_id'),
+                'sub_category' => $this->input->post('sub_category'),
+                'brand_model' => $this->input->post('brand_model'),
+                'processor' => $this->input->post('processor'),
+                'ram' => $this->input->post('ram'),
+                'hard_disk' => $this->input->post('hard_disk'),
+                'os' => $this->input->post('os'),
+                'serial_number' => $this->input->post('serial_number'),
+                'asset_tag' => $this->input->post('asset_tag'),
+                'asset_condition' => $this->input->post('asset_condition'),
+                'purchase_date' => $this->input->post('purchase_date'),
+                'vendor' => $this->input->post('vendor'),
+                'warranty_expiry' => $this->input->post('warranty_expiry'),
+                'location' => $this->input->post('location'),
+                'status' => $this->input->post('status'),
+                'assigned_to' => $this->input->post('assigned_to'),
+                'amc_details' => $this->input->post('amc_details'),
+                'remarks' => $this->input->post('remarks')
+            );
+
+            if ($this->Asset_model->update_asset($id, $update_data)) {
+                $this->Audit_model->log_action('Updated Item', 'Asset', $id, "Updated details for {$update_data['asset_tag']}");
+                $this->session->set_flashdata('success', 'Asset updated successfully!');
+                redirect('assets/view_details/' . $update_data['asset_tag']);
+            } else {
+                $this->session->set_flashdata('error', 'Failed to update asset.');
+                redirect('assets/edit/' . $id);
+            }
+        }
+    }
+
     public function view_details($tag)
     {
         $this->db->select('assets.*, categories.name as category_name, colleges.name as college_name');

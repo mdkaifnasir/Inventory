@@ -38,6 +38,14 @@ class Auth extends CI_Controller
                     'logged_in' => TRUE
                 );
                 $this->session->set_userdata($session_data);
+
+                // Check for redirect URL
+                $redirect_url = $this->session->userdata('redirect_url');
+                if ($redirect_url) {
+                    $this->session->unset_userdata('redirect_url');
+                    redirect($redirect_url);
+                }
+
                 redirect('dashboard');
             } else {
                 $this->session->set_flashdata('error', 'Invalid login credentials');
