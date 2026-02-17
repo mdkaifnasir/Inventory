@@ -143,27 +143,6 @@
         </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="px-6 mt-6 grid grid-cols-2 gap-3">
-        <a href="<?php echo site_url('assets/edit/' . $asset->id); ?>"
-            class="bg-white py-4 px-2 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-1 group hover:border-primary-200 transition-all active:scale-95">
-            <span
-                class="material-symbols-rounded text-primary-500 text-xl font-light group-hover:scale-110 transition-transform">edit_square</span>
-            <div class="flex flex-col items-center -mt-1">
-                <span class="text-[9px] font-bold text-gray-800 leading-tight">Edit Detail</span>
-                <span class="text-[7px] font-medium text-gray-400">Modify Item</span>
-            </div>
-        </a>
-        <a href="<?php echo site_url('issues/report?tag=' . urlencode($asset->asset_tag)); ?>"
-            class="bg-white py-4 px-2 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center gap-1 group hover:border-red-200 transition-all active:scale-95">
-            <span
-                class="material-symbols-rounded text-red-500 text-xl font-light group-hover:scale-110 transition-transform">report_problem</span>
-            <div class="flex flex-col items-center -mt-1">
-                <span class="text-[9px] font-bold text-gray-800 leading-tight">Mark as Not Working</span>
-                <span class="text-[7px] font-medium text-gray-400">Report Issue</span>
-            </div>
-        </a>
-    </div>
 
     <!-- Hardware Specifications Section -->
     <div class="px-6 mt-10">
