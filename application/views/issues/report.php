@@ -160,7 +160,21 @@
 </div>
 
 <!-- QR Scanner Library -->
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript">
+    // Handle URL Tag on load
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tagFromUrl = urlParams.get('tag');
+
+        if (tagFromUrl) {
+            const tagInput = document.getElementById('asset_tag');
+            if (tagInput) {
+                tagInput.value = tagFromUrl;
+                lookupAsset(tagFromUrl);
+            }
+        }
+    });
+</script>
 
 <script>
     const html5QrCode = new Html5Qrcode("reader");
