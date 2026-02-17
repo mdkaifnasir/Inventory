@@ -894,7 +894,8 @@ class Assets extends CI_Controller
     public function edit($id)
     {
         if (!$this->session->userdata('logged_in')) {
-            $this->session->set_userdata('redirect_url', current_url());
+            $redirect_url = current_url() . ($_SERVER['QUERY_STRING'] ? '?' . $_SERVER['QUERY_STRING'] : '');
+            $this->session->set_userdata('redirect_url', $redirect_url);
             redirect('auth/login');
         }
 

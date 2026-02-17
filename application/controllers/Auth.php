@@ -44,9 +44,9 @@ class Auth extends CI_Controller
                 if ($redirect_url) {
                     $this->session->unset_userdata('redirect_url');
                     redirect($redirect_url);
+                } else {
+                    redirect('dashboard');
                 }
-
-                redirect('dashboard');
             } else {
                 $this->session->set_flashdata('error', 'Invalid login credentials');
                 redirect('auth/login');
