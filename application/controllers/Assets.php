@@ -840,7 +840,7 @@ class Assets extends CI_Controller
             redirect('dashboard');
         }
         // Get asset details for logging
-        $asset = $this->db->get_where('assets', ['id' => $id])->row();
+        $asset = $this->db->where('id', $id)->get('assets')->row();
 
         if ($this->Asset_model->return_asset($id)) {
             $this->Audit_model->log_action('Returned Asset', 'Asset', $id, "Item returned to stock: {$asset->name}");
