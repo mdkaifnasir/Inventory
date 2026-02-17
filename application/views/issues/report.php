@@ -160,7 +160,9 @@
 </div>
 
 <!-- QR Scanner Library -->
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript">
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+<script>
     // Handle URL Tag on load
     document.addEventListener('DOMContentLoaded', function () {
         const urlParams = new URLSearchParams(window.location.search);
@@ -174,9 +176,7 @@
             }
         }
     });
-</script>
 
-<script>
     const html5QrCode = new Html5Qrcode("reader");
     let isScanning = false;
 
