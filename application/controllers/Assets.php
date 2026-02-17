@@ -867,7 +867,7 @@ class Assets extends CI_Controller
         $id = $this->input->post('asset_id');
         $new_date = $this->input->post('return_date');
 
-        $asset = $this->db->get_where('assets', ['id' => $id])->row();
+        $asset = $this->db->where('id', $id)->get('assets')->row();
 
         if ($this->Asset_model->extend_loan($id, $new_date)) {
             $this->Audit_model->log_action('Extended Loan', 'Asset', $id, "Loan extended for: {$asset->name} to $new_date");
