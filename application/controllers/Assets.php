@@ -815,7 +815,7 @@ class Assets extends CI_Controller
         $count = 0;
 
         foreach ($asset_ids as $id) {
-            $asset = $this->db->get_where('assets', ['id' => $id])->row();
+            $asset = $this->db->where('id', $id)->get('assets')->row();
             // Allocate full quantity of the selected row
             if ($asset && $asset->status == 'In Stock' && $asset->quantity > 0) {
                 if ($this->Asset_model->split_and_allocate($id, $college_id, $asset->quantity, $return_date)) {
