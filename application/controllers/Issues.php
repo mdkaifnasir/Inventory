@@ -283,7 +283,7 @@ class Issues extends CI_Controller
         $user_id = $this->session->userdata('user_id');
         $role_id = $this->session->userdata('role_id');
 
-        $issue = $this->db->get_where('asset_issues', ['id' => $id])->row();
+        $issue = $this->db->where('id', $id)->get('asset_issues')->row();
 
         if (!$issue) {
             $this->session->set_flashdata('error', 'Issue not found.');
