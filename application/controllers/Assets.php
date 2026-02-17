@@ -776,7 +776,7 @@ class Assets extends CI_Controller
         $quantity = (int) $this->input->post('quantity');
         $return_date = $this->input->post('return_date') ? $this->input->post('return_date') : null;
 
-        $asset = $this->db->get_where('assets', ['id' => $asset_id])->row();
+        $asset = $this->db->where('id', $asset_id)->get('assets')->row();
         if (!$asset || $quantity <= 0) {
             $this->session->set_flashdata('error', 'Invalid allocation request.');
             redirect('assets');
