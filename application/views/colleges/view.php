@@ -187,7 +187,7 @@
                 $cat_summary = [];
                 foreach ($assets as $a) {
                     if (!isset($cat_summary[$a->category_name])) {
-                        $cat_summary[$a->category_name] = ['count' => 0, 'units' => 0];
+                        $cat_summary[$a->category_name] = ['count' => 0, 'units' => 0, 'id' => $a->category_id];
                     }
                     $cat_summary[$a->category_name]['count']++;
                     $cat_summary[$a->category_name]['units'] += $a->quantity;
@@ -196,7 +196,9 @@
 
                 foreach ($cat_summary as $name => $stats):
                     ?>
-                    <div class="bg-white/5 border border-white/10 p-5 rounded-3xl hover:bg-white/10 transition-all group">
+                    <a href="<?php echo site_url('assets?college=' . $college->id . '&category=' . $stats['id']); ?>"
+                        target="_blank"
+                        class="bg-white/5 border border-white/10 p-5 rounded-3xl hover:bg-white/10 transition-all group block cursor-pointer">
                         <p class="text-[10px] font-black text-primary-400 uppercase tracking-widest mb-3">
                             <?php echo $name; ?>
                         </p>
@@ -207,7 +209,7 @@
                         </div>
                         <p class="text-[10px] font-medium text-gray-500 mt-1"><?php echo $stats['count']; ?> Batch Records
                         </p>
-                    </div>
+                    </a>
                 <?php endforeach; ?>
 
                 <?php if (empty($cat_summary)): ?>
