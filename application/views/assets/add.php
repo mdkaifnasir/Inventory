@@ -136,9 +136,9 @@
                         class="condition-btn-full flex items-center justify-center gap-2 h-14 rounded-xl border border-gray-200 text-gray-500 font-bold text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
                         <span class="material-symbols-outlined text-lg">thumb_up</span> Used (Good)
                     </button>
-                    <button type="button" onclick="setFullCondition('Refurbished', this)"
+                    <button type="button" onclick="setFullCondition('Not Working', this)"
                         class="condition-btn-full flex items-center justify-center gap-2 h-14 rounded-xl border border-gray-200 text-gray-500 font-bold text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
-                        <span class="material-symbols-outlined text-lg">build</span> Refurbished
+                        <span class="material-symbols-outlined text-lg">build</span> Not Working
                     </button>
                 </div>
             </div>
@@ -353,7 +353,8 @@
         const condInput = document.getElementById('asset_condition_input');
         const cond = condInput ? condInput.value : 'Refurbished';
 
-        const data = `Item: ${name}\nCat: ${cat}\nBrand: ${brand}\nSN: ${sn}\nTag: ${tag}\nLoc: ${loc}\nCond: ${cond}`;
+        const siteUrl = '<?php echo site_url('assets/view_details'); ?>';
+        const data = tag !== 'N/A' ? `${siteUrl}/${tag}` : `Item: ${name}\nCat: ${cat}\nBrand: ${brand}\nSN: ${sn}\nTag: ${tag}\nLoc: ${loc}\nCond: ${cond}`;
 
         const container = document.getElementById('qrcode_add');
         if (container) {

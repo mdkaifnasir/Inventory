@@ -508,8 +508,8 @@
         document.getElementById('m_date').textContent = new Date(asset.created_at).toLocaleDateString();
 
         // Generate QR code - Using a URL makes it "usable" by any standard scanner
-        const siteUrl = '<?php echo site_url('assets'); ?>';
-        const qrContent = `${siteUrl}?q=${asset.asset_tag}`;
+        const siteUrl = '<?php echo site_url('assets/view_details'); ?>';
+        const qrContent = `${siteUrl}/${asset.asset_tag}`;
 
         const container = document.getElementById('m_qrcode');
         container.innerHTML = "";

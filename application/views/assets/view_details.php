@@ -58,8 +58,30 @@
 
     // Placeholder Image Logic
     $placeholder_img = "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=800"; // Generic Laptop
-    if (strpos($device_type, 'desktop') !== false || strpos($device_type, 'cpu') !== false)
+    if (strpos($device_type, 'desktop') !== false || strpos($device_type, 'cpu') !== false) {
         $placeholder_img = "https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&q=80&w=800";
+    }
+
+    // Check for dynamic product image based on name or ID
+    $product_dir = 'assets/css/product-image/';
+    $image_name = trim($asset->name);
+    // Clean name for file system (optional, but handles leading/trailing spaces)
+    $image_by_name = $product_dir . $image_name . '.png';
+    $image_by_id = $product_dir . $asset->id . '.png';
+
+    // Use FCPATH or absolute document root to check file existence
+    $root_path = defined('FCPATH') ? FCPATH : $_SERVER['DOCUMENT_ROOT'] . '/inventry/';
+    $base_url_prefix = function_exists('base_url') ? base_url() : '/inventry/';
+
+    if (file_exists($root_path . $image_by_name)) {
+        $placeholder_img = $base_url_prefix . $image_by_name;
+    } elseif (file_exists($root_path . $image_by_id)) {
+        $placeholder_img = $base_url_prefix . $image_by_id;
+    } elseif (file_exists('./' . $image_by_name)) {
+        $placeholder_img = $base_url_prefix . $image_by_name;
+    } elseif (file_exists('./' . $image_by_id)) {
+        $placeholder_img = $base_url_prefix . $image_by_id;
+    }
 
     // Parse Location (Assume "Lab 3, 3rd Floor" or similar)
     $location_main = $asset->location ?: 'Not Assigned';
@@ -80,9 +102,9 @@
     $condition_color = "green"; // Default Working
     if ($condition == 'new' || $condition == 'working')
         $condition_color = "green";
-    elseif ($condition == 'refurbished' || $condition == 'used (good)')
+    elseif ($condition == 'used (good)')
         $condition_color = "blue";
-    else
+    else // Not Working / Faulty / Scrap
         $condition_color = "red";
     ?>
 
@@ -108,8 +130,8 @@
             <div class="flex gap-6 relative z-10">
                 <!-- Device Image Area -->
                 <div
-                    class="w-1/3 aspect-square bg-white rounded-[1.8rem] flex items-center justify-center border border-gray-50 overflow-hidden shadow-sm">
-                    <img src="<?php echo $placeholder_img; ?>" class="w-full h-full object-cover">
+                    class="w-1/3 aspect-square bg-gray-50 rounded-[1.8rem] flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
+                    <span class="material-symbols-rounded text-6xl text-gray-400"><?php echo $icon; ?></span>
                 </div>
                 <!-- Basic Info -->
                 <div class="flex-1 flex flex-col justify-center">
@@ -249,6 +271,28 @@
                     <p class="text-xs font-bold text-gray-900 text-right">#<?php echo $asset->id; ?></p>
                 </div>
             </div>
+
+            <!-- Accessories Row for Desktops -->
+            <?php
+            $cat_name_lower = strtolower($asset->category_name ?? '');
+            $asset_name_lower = strtolower($asset->name ?? '');
+            if (strpos($cat_name_lower, 'desktop') !== false || strpos($cat_name_lower, 'computer') !== false || strpos($asset_name_lower, 'desktop') !== false || strpos($asset_name_lower, 'computer') !== false || strpos($asset_name_lower, 'cpu') !== false):
+                ?>
+                <div class="flex items-center justify-between w-full pt-2 border-t border-gray-50">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                            <span class="material-symbols-rounded text-blue-500 text-lg">devices_other</span>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-extrabold text-gray-400 uppercase">Peripherals</p>
+                            <p class="text-xs font-bold text-gray-900">Monitor, Mouse & Keyboard Attached</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">INCLUDED</span>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 

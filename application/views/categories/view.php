@@ -244,8 +244,9 @@
         document.getElementById('m_condition').textContent = asset.asset_condition || 'New';
         document.getElementById('m_date').textContent = new Date(asset.created_at).toLocaleDateString();
 
-        // Generate QR code
-        const qrContent = `Item: ${asset.name}\nTag: ${asset.asset_tag}\nCat: <?php echo $category->name; ?>\nCond: ${asset.asset_condition}`;
+        // Generate QR code - Using a URL makes it "usable" by any standard scanner
+        const siteUrl = '<?php echo site_url('assets/view_details'); ?>';
+        const qrContent = `${siteUrl}/${asset.asset_tag}`;
         const container = document.getElementById('m_qrcode');
         container.innerHTML = "";
 

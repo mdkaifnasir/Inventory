@@ -143,7 +143,7 @@
                         'New' => 'fiber_new',
                         'Working' => 'check_circle',
                         'Used (Good)' => 'thumb_up',
-                        'Refurbished' => 'build'
+                        'Not Working' => 'build'
                     ];
                     foreach ($conditions as $label => $icon):
                         $isActive = ($asset->asset_condition == $label);
@@ -226,7 +226,8 @@
                 <select name="vendor"
                     class="w-full h-12 px-4 rounded-lg border border-gray-200 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-600 transition-all font-medium">
                     <option value="">Select Vendor</option>
-                    <option value="Dell Business" <?php echo ($asset->vendor == 'Dell Business') ? 'selected' : ''; ?>>Dell Business</option>
+                    <option value="Dell Business" <?php echo ($asset->vendor == 'Dell Business') ? 'selected' : ''; ?>>
+                        Dell Business</option>
                     <option value="Amazon Business" <?php echo ($asset->vendor == 'Amazon Business') ? 'selected' : ''; ?>>Amazon Business</option>
                     <option value="Local Store" <?php echo ($asset->vendor == 'Local Store') ? 'selected' : ''; ?>>Local
                         Store / Institutional Vendor</option>
@@ -383,7 +384,8 @@
         const condInput = document.getElementById('asset_condition_input');
         const cond = condInput ? condInput.value : 'Refurbished';
 
-        const data = `Item: ${name}\nCat: ${cat}\nBrand: ${brand}\nSN: ${sn}\nTag: ${tag}\nLoc: ${loc}\nCond: ${cond}`;
+        const siteUrl = '<?php echo site_url('assets/view_details'); ?>';
+        const data = tag !== 'N/A' ? `${siteUrl}/${tag}` : `Item: ${name}\nCat: ${cat}\nBrand: ${brand}\nSN: ${sn}\nTag: ${tag}\nLoc: ${loc}\nCond: ${cond}`;
 
         const container = document.getElementById('qrcode_add');
         if (container) {

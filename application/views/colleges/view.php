@@ -178,7 +178,8 @@
             <div class="mb-8">
                 <h3 class="text-xl font-black tracking-tight">Detailed Inventory Breakdown</h3>
                 <p class="text-gray-400 text-sm font-medium">Categorized summary of items held by
-                    <?php echo $college->name; ?></p>
+                    <?php echo $college->name; ?>
+                </p>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -197,7 +198,8 @@
                     ?>
                     <div class="bg-white/5 border border-white/10 p-5 rounded-3xl hover:bg-white/10 transition-all group">
                         <p class="text-[10px] font-black text-primary-400 uppercase tracking-widest mb-3">
-                            <?php echo $name; ?></p>
+                            <?php echo $name; ?>
+                        </p>
                         <div class="flex items-baseline gap-2">
                             <span
                                 class="text-2xl font-black tracking-tighter"><?php echo number_format($stats['units']); ?></span>
@@ -439,7 +441,7 @@
         container.innerHTML = "";
         if (typeof QRCode !== 'undefined') {
             new QRCode(container, {
-                text: `<?php echo site_url('assets/view_details/'); ?>${asset.asset_tag}`,
+                text: `<?php echo site_url('assets/view_details'); ?>/${asset.asset_tag}`,
                 width: 140,
                 height: 140,
                 colorDark: "#000000",
